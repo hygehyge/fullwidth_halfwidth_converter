@@ -42,7 +42,8 @@ void main() {
   });
 
   test('convert fullwidth to halfwidth', () {
-    final result = FullwidthHalfwidthConverter.convertToHalfwidth(fullwidthInput);
+    final result =
+        FullwidthHalfwidthConverter.convertToHalfwidth(fullwidthInput);
 
     expect(result, equals(halfwidthInput));
   });
@@ -90,7 +91,8 @@ void main() {
   });
 
   test('convert halfwidth to fullwidth', () {
-    final result = FullwidthHalfwidthConverter.convertToFullwidth(halfwidthInput);
+    final result =
+        FullwidthHalfwidthConverter.convertToFullwidth(halfwidthInput);
 
     expect(result, equals(fullwidthInput));
   });

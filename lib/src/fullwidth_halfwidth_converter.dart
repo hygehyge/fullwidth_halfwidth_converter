@@ -183,8 +183,12 @@ class FullwidthHalfwidthConverter {
     bool convertSymbol = false,
     bool convertKana = false,
   }) {
-    final convertAll =
-        [convertNumber, convertAlphabet, convertSymbol, convertKana].every((element) => element == false);
+    final convertAll = [
+      convertNumber,
+      convertAlphabet,
+      convertSymbol,
+      convertKana,
+    ].every((element) => element == false);
     var result = input;
 
     //数字変換
@@ -192,7 +196,9 @@ class FullwidthHalfwidthConverter {
       final regex = RegExp(r'^[０-９]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char) ? String.fromCharCode(rune - _unicodeDifference) : char;
+        return regex.hasMatch(char)
+            ? String.fromCharCode(rune - _unicodeDifference)
+            : char;
       });
       result = string.join();
     }
@@ -202,7 +208,9 @@ class FullwidthHalfwidthConverter {
       final regex = RegExp(r'^[Ａ-Ｚａ-ｚ]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char) ? String.fromCharCode(rune - _unicodeDifference) : char;
+        return regex.hasMatch(char)
+            ? String.fromCharCode(rune - _unicodeDifference)
+            : char;
       });
       result = string.join();
     }
@@ -212,7 +220,9 @@ class FullwidthHalfwidthConverter {
       final regex = RegExp(r'^[！-／：-＠［-｀｛-～]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char) ? String.fromCharCode(rune - _unicodeDifference) : char;
+        return regex.hasMatch(char)
+            ? String.fromCharCode(rune - _unicodeDifference)
+            : char;
       });
       result = string.join().replaceAll('　', ' ');
     }
@@ -237,8 +247,12 @@ class FullwidthHalfwidthConverter {
     bool convertSymbol = false,
     bool convertKana = false,
   }) {
-    final convertAll =
-        [convertNumber, convertAlphabet, convertSymbol, convertKana].every((element) => element == false);
+    final convertAll = [
+      convertNumber,
+      convertAlphabet,
+      convertSymbol,
+      convertKana,
+    ].every((element) => element == false);
     var result = input;
 
     //数字変換
@@ -246,7 +260,9 @@ class FullwidthHalfwidthConverter {
       final regex = RegExp(r'^[0-9]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char) ? String.fromCharCode(rune + _unicodeDifference) : char;
+        return regex.hasMatch(char)
+            ? String.fromCharCode(rune + _unicodeDifference)
+            : char;
       });
       result = string.join();
     }
@@ -256,7 +272,9 @@ class FullwidthHalfwidthConverter {
       final regex = RegExp(r'^[A-Za-z]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char) ? String.fromCharCode(rune + _unicodeDifference) : char;
+        return regex.hasMatch(char)
+            ? String.fromCharCode(rune + _unicodeDifference)
+            : char;
       });
       result = string.join();
     }
@@ -266,7 +284,9 @@ class FullwidthHalfwidthConverter {
       final regex = RegExp(r'^[!-/:-@[-`{-~]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char) ? String.fromCharCode(rune + _unicodeDifference) : char;
+        return regex.hasMatch(char)
+            ? String.fromCharCode(rune + _unicodeDifference)
+            : char;
       });
       result = string.join().replaceAll(' ', '　');
     }
