@@ -1,0 +1,11 @@
+name: fullwidth_halfwidth_converter
+description: Package to provide converting fullwidth and halfwidth in Japanese.
+version: 1.0.0
+repository: https://github.com/hygehyge/fullwidth_halfwidth_converter
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dev_dependencies:
+  test: ^1.25.2
+  flutter_lints: ^3.0.0
