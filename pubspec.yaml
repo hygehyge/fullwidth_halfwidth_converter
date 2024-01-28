@@ -1,6 +1,6 @@
 name: fullwidth_halfwidth_converter
 description: Package to provide conversion between fullwidth and halfwidth in Japanese.
-version: 1.0.1
+version: 1.0.2
 repository: https://github.com/hygehyge/fullwidth_halfwidth_converter
 
 environment:
