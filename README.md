@@ -13,11 +13,11 @@ In your code:
 ```dart
 import 'package:fullwidth_halfwidth_converter/fullwidth_halfwidth_converter.dart';
 
-final converted = 'アＡ１？'.convertToHalfwidth();
+final converted = 'アＡ１？'.toHalfwidth();
 print(converted);// this shows 'ｱA1?'.
 
 // you can specify conversion type.
-final numberAndKanaConverted = 'アＡ１？'.convertToHalfwidth(convertNumber:true,convertKana:true);
-print(numberAndKanaConverted);// this shows 'ｱＡ1？'.
+final numberAndKanaConverted = 'ｱA1?'.toFullwidth(convertNumber:true,convertKana:true);
+print(numberAndKanaConverted);// this shows 'アA１?'.
 ```
 
