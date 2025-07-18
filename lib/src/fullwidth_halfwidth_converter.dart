@@ -175,6 +175,18 @@ class FullwidthHalfwidthConverter {
     'ｰ': 'ー',
   };
 
+  //全角文字判定用の正規表現
+  static final RegExp _fullwidthNumberRegex = RegExp(r'^[０-９]+$');
+  static final RegExp _fullwidthAlphabetRegex = RegExp(r'^[Ａ-Ｚａ-ｚ]+$');
+  static final RegExp _fullwidthSymbolRegex = RegExp(r'^[！-／：-＠［-｀｛-～]+$');
+  static final RegExp _fullwidthKanaRegex = RegExp(r'[ァ-ヴ]');
+
+  //半角文字判定用の正規表現
+  static final RegExp _halfwidthNumberRegex = RegExp(r'^[0-9]+$');
+  static final RegExp _halfwidthAlphabetRegex = RegExp(r'^[A-Za-z]+$');
+  static final RegExp _halfwidthSymbolRegex = RegExp(r'^[!-/:-@[-`{-~]+$');
+  static final RegExp _halfwidthKanaRegex = RegExp(r'[ｱ-ﾝﾞﾟｰァ-ｮ]ﾞ?ﾟ?');
+
   ///Convert input string to halfwidth string.
   static String convertToHalfwidth(
     String input, {
@@ -193,44 +205,34 @@ class FullwidthHalfwidthConverter {
 
     //数字変換
     if (convertAll || convertNumber) {
-      final regex = RegExp(r'^[０-９]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char)
-            ? String.fromCharCode(rune - _unicodeDifference)
-            : char;
+        return _fullwidthNumberRegex.hasMatch(char) ? String.fromCharCode(rune - _unicodeDifference) : char;
       });
       result = string.join();
     }
 
     //アルファベット変換
     if (convertAll || convertAlphabet) {
-      final regex = RegExp(r'^[Ａ-Ｚａ-ｚ]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char)
-            ? String.fromCharCode(rune - _unicodeDifference)
-            : char;
+        return _fullwidthAlphabetRegex.hasMatch(char) ? String.fromCharCode(rune - _unicodeDifference) : char;
       });
       result = string.join();
     }
 
     //記号変換
     if (convertAll || convertSymbol) {
-      final regex = RegExp(r'^[！-／：-＠［-｀｛-～]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char)
-            ? String.fromCharCode(rune - _unicodeDifference)
-            : char;
+        return _fullwidthSymbolRegex.hasMatch(char) ? String.fromCharCode(rune - _unicodeDifference) : char;
       });
       result = string.join().replaceAll('　', ' ');
     }
 
     //カナ変換
     if (convertAll || convertKana) {
-      final regex = RegExp(r'[ァ-ヴ]');
-      result = result.replaceAllMapped(regex, (Match match) {
+      result = result.replaceAllMapped(_fullwidthKanaRegex, (Match match) {
         final halfwidthKana = _fullwidthToHalfwidthKanaMap[match.group(0)!];
         return halfwidthKana ?? match.group(0)!;
       });
@@ -257,44 +259,34 @@ class FullwidthHalfwidthConverter {
 
     //数字変換
     if (convertAll || convertNumber) {
-      final regex = RegExp(r'^[0-9]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char)
-            ? String.fromCharCode(rune + _unicodeDifference)
-            : char;
+        return _halfwidthNumberRegex.hasMatch(char) ? String.fromCharCode(rune + _unicodeDifference) : char;
       });
       result = string.join();
     }
 
     //アルファベット変換
     if (convertAll || convertAlphabet) {
-      final regex = RegExp(r'^[A-Za-z]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char)
-            ? String.fromCharCode(rune + _unicodeDifference)
-            : char;
+        return _halfwidthAlphabetRegex.hasMatch(char) ? String.fromCharCode(rune + _unicodeDifference) : char;
       });
       result = string.join();
     }
 
     //記号変換
     if (convertAll || convertSymbol) {
-      final regex = RegExp(r'^[!-/:-@[-`{-~]+$');
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
-        return regex.hasMatch(char)
-            ? String.fromCharCode(rune + _unicodeDifference)
-            : char;
+        return _halfwidthSymbolRegex.hasMatch(char) ? String.fromCharCode(rune + _unicodeDifference) : char;
       });
       result = string.join().replaceAll(' ', '　');
     }
 
     //カナ変換
     if (convertAll || convertKana) {
-      final regex = RegExp(r'[ｱ-ﾝﾞﾟｰァ-ｮ]ﾞ?ﾟ?');
-      result = result.replaceAllMapped(regex, (Match match) {
+      result = result.replaceAllMapped(_halfwidthKanaRegex, (Match match) {
         final fullwidthKana = _halfwidthToFullwidthKanaMap[match.group(0)!];
         return fullwidthKana ?? match.group(0)!;
       });
