@@ -7,5 +7,6 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dev_dependencies:
+  benchmark_runner: ^2.0.1
   test: ^1.26.2
   flutter_lints: ^6.0.0
