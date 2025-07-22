@@ -42,10 +42,21 @@ void main() {
   });
 
   test('convert fullwidth to halfwidth', () {
-    final result =
-        FullwidthHalfwidthConverter.convertToHalfwidth(fullwidthInput);
+    final result = FullwidthHalfwidthConverter.convertToHalfwidth(fullwidthInput);
 
     expect(result, equals(halfwidthInput));
+  });
+
+  test('not convert fullwidth to halfwidth', () {
+    final result = FullwidthHalfwidthConverter.convertToHalfwidth(
+      fullwidthInput,
+      convertNumber: false,
+      convertAlphabet: false,
+      convertSymbol: false,
+      convertKana: false,
+    );
+
+    expect(result, equals(fullwidthInput));
   });
 
   test('convert fullwidth to halfwidth via Extension', () {
@@ -91,10 +102,21 @@ void main() {
   });
 
   test('convert halfwidth to fullwidth', () {
-    final result =
-        FullwidthHalfwidthConverter.convertToFullwidth(halfwidthInput);
+    final result = FullwidthHalfwidthConverter.convertToFullwidth(halfwidthInput);
 
     expect(result, equals(fullwidthInput));
+  });
+
+  test('not convert halfwidth to fullwidth', () {
+    final result = FullwidthHalfwidthConverter.convertToFullwidth(
+      halfwidthInput,
+      convertNumber: false,
+      convertAlphabet: false,
+      convertSymbol: false,
+      convertKana: false,
+    );
+
+    expect(result, equals(halfwidthInput));
   });
 
   test('convert halfwidth to fullwidth via Extension', () {
