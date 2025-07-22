@@ -3,10 +3,10 @@ import 'package:fullwidth_halfwidth_converter/src/fullwidth_halfwidth_converter.
 extension StringExtensions on String {
   ///Convert to halfwidth string.
   String toHalfwidth({
-    bool convertNumber = false,
-    bool convertAlphabet = false,
-    bool convertSymbol = false,
-    bool convertKana = false,
+    bool? convertNumber,
+    bool? convertAlphabet,
+    bool? convertSymbol,
+    bool? convertKana,
   }) =>
       FullwidthHalfwidthConverter.convertToHalfwidth(
         this,
@@ -18,10 +18,10 @@ extension StringExtensions on String {
 
   ///Convert to fullwidth string.
   String toFullwidth({
-    bool convertNumber = false,
-    bool convertAlphabet = false,
-    bool convertSymbol = false,
-    bool convertKana = false,
+    bool? convertNumber,
+    bool? convertAlphabet,
+    bool? convertSymbol,
+    bool? convertKana,
   }) =>
       FullwidthHalfwidthConverter.convertToFullwidth(
         this,

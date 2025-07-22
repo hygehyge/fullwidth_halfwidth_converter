@@ -190,21 +190,21 @@ class FullwidthHalfwidthConverter {
   ///Convert input string to halfwidth string.
   static String convertToHalfwidth(
     String input, {
-    bool convertNumber = false,
-    bool convertAlphabet = false,
-    bool convertSymbol = false,
-    bool convertKana = false,
+    bool? convertNumber,
+    bool? convertAlphabet,
+    bool? convertSymbol,
+    bool? convertKana,
   }) {
     final convertAll = [
       convertNumber,
       convertAlphabet,
       convertSymbol,
       convertKana,
-    ].every((element) => element == false);
+    ].every((element) => element == null);
     var result = input;
 
     //数字変換
-    if (convertAll || convertNumber) {
+    if (convertAll || (convertNumber ?? false)) {
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
         return _fullwidthNumberRegex.hasMatch(char) ? String.fromCharCode(rune - _unicodeDifference) : char;
@@ -213,7 +213,7 @@ class FullwidthHalfwidthConverter {
     }
 
     //アルファベット変換
-    if (convertAll || convertAlphabet) {
+    if (convertAll || (convertAlphabet ?? false)) {
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
         return _fullwidthAlphabetRegex.hasMatch(char) ? String.fromCharCode(rune - _unicodeDifference) : char;
@@ -222,7 +222,7 @@ class FullwidthHalfwidthConverter {
     }
 
     //記号変換
-    if (convertAll || convertSymbol) {
+    if (convertAll || (convertSymbol ?? false)) {
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
         return _fullwidthSymbolRegex.hasMatch(char) ? String.fromCharCode(rune - _unicodeDifference) : char;
@@ -231,7 +231,7 @@ class FullwidthHalfwidthConverter {
     }
 
     //カナ変換
-    if (convertAll || convertKana) {
+    if (convertAll || (convertKana ?? false)) {
       result = result.replaceAllMapped(_fullwidthKanaRegex, (Match match) {
         final halfwidthKana = _fullwidthToHalfwidthKanaMap[match.group(0)!];
         return halfwidthKana ?? match.group(0)!;
@@ -244,21 +244,21 @@ class FullwidthHalfwidthConverter {
   ///Convert input string to fullwidth string.
   static String convertToFullwidth(
     String input, {
-    bool convertNumber = false,
-    bool convertAlphabet = false,
-    bool convertSymbol = false,
-    bool convertKana = false,
+    bool? convertNumber,
+    bool? convertAlphabet,
+    bool? convertSymbol,
+    bool? convertKana,
   }) {
     final convertAll = [
       convertNumber,
       convertAlphabet,
       convertSymbol,
       convertKana,
-    ].every((element) => element == false);
+    ].every((element) => element == null);
     var result = input;
 
     //数字変換
-    if (convertAll || convertNumber) {
+    if (convertAll || (convertNumber ?? false)) {
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
         return _halfwidthNumberRegex.hasMatch(char) ? String.fromCharCode(rune + _unicodeDifference) : char;
@@ -267,7 +267,7 @@ class FullwidthHalfwidthConverter {
     }
 
     //アルファベット変換
-    if (convertAll || convertAlphabet) {
+    if (convertAll || (convertAlphabet ?? false)) {
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
         return _halfwidthAlphabetRegex.hasMatch(char) ? String.fromCharCode(rune + _unicodeDifference) : char;
@@ -276,7 +276,7 @@ class FullwidthHalfwidthConverter {
     }
 
     //記号変換
-    if (convertAll || convertSymbol) {
+    if (convertAll || (convertSymbol ?? false)) {
       final string = result.runes.map<String>((rune) {
         final char = String.fromCharCode(rune);
         return _halfwidthSymbolRegex.hasMatch(char) ? String.fromCharCode(rune + _unicodeDifference) : char;
@@ -285,7 +285,7 @@ class FullwidthHalfwidthConverter {
     }
 
     //カナ変換
-    if (convertAll || convertKana) {
+    if (convertAll || (convertKana ?? false)) {
       result = result.replaceAllMapped(_halfwidthKanaRegex, (Match match) {
         final fullwidthKana = _halfwidthToFullwidthKanaMap[match.group(0)!];
         return fullwidthKana ?? match.group(0)!;
