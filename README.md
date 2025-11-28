@@ -1,6 +1,6 @@
 # fullwidth_halfwidth_converter
 
-Provide conversion between fullwidth and halfwidth in Japanese.
+Provide conversion between fullwidth(全角) and halfwidth(半角) in Japanese.
 
 ## Features
 
