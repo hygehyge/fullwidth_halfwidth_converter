@@ -1,5 +1,8 @@
+## 1.2.1
+- update dependencies
+
 ## 1.2.0
-- Change the type of conversion parameters from bool to bool? to provide more explicit control
+- change the type of conversion parameters from bool to bool? to provide more explicit control
 
 ## 1.1.0
 - improve performance
